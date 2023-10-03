@@ -1,0 +1,6 @@
+bin/*
+builds/*
+.cache/*
+.ccls/*
+.clangd/*
+.ignore/*
