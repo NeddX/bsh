@@ -1,3 +1,0 @@
-/home/nedd/dev/bsh/builds/linux-x86_64/CMakeFiles/bsh.dir
-/home/nedd/dev/bsh/builds/linux-x86_64/CMakeFiles/edit_cache.dir
-/home/nedd/dev/bsh/builds/linux-x86_64/CMakeFiles/rebuild_cache.dir
