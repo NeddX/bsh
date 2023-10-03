@@ -1,0 +1,59 @@
+#+author: Neddiendrohu
+#+title: BSH (Basic Shell)
+#+description: README documentation for bsh.
+
+* Table of Contents
+1. Introduction
+2. Installation and Compilation
+3. Usage
+4. Basic job system
+5. License
+
+** Introduction
+BSH (Basic Shell) is a lightweight, minimalistic shell designed as an example for developing CLI applications in C on POSIX-compatible systems. It serves as a starting point for those interested in building CLI programs. BSH is written in C and relies heavily on the POSIX API, making it compatible with Unix-like operating systems.
+
+*** Features
+- Minimalistic easy to use shell
+- Basic job system
+- Lightweight, Easy-to-read, robust and sophisticated codebase for learning and development
+- No dependencies
+
+** Installation and Compilation
+Requirements:
+- CMake minimum version 3.20
+- Any C Compiler that has fully implemented the C99 standard
+- POSIX Compatible system
+
+Clone the repository.
+#+begin_src
+git clone https://github.com/NeddX/bsh
+#+end_src
+
+Run the build script.
+#+begin_src
+chmod 775 ./build && ./build [ Debug Release, Default: Debug ]
+#+end_src
+
+Run the bsh.
+#+begin_src
+bin/bsh
+#+end_src
+
+** Usage
+BSH has few built-in commands:
+- =help=: Displays a list of available commands and their usages.
+- =cd [ dir ]=: Change the current working directory. If no directory was provided, it go to the home directory of the user.
+- =pwd=: Print the current working directory.
+- =exit=: Suspend the shell.
+- =fg [ job_id ]=: Bring a background job to the foreground.
+- =bg [ job_id ]=: Bring a foreground job to the background.
+- =joblist=: List currently active jobs.
+
+** Basic job system
+...
+
+** License
+BSH is open-source software released under the MIT License. You are free to use, modify, and distribute it as per the terms of the license.
+Check the LICENSE file for more information.
+
+Please note that BSH is a minimalistic shell designed for educational purposes and may not be suitable for production use. Feel free to explore the source code and adapt it to your needs.
