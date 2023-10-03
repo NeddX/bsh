@@ -54,6 +54,6 @@ BSH has few built-in commands:
 
 ** License
 BSH is open-source software released under the MIT License. You are free to use, modify, and distribute it as per the terms of the license.
-Check the LICENSE file for more information.
+Check the =LICENSE= file for more information.
 
 Please note that BSH is a minimalistic shell designed for educational purposes and may not be suitable for production use. Feel free to explore the source code and adapt it to your needs.
