@@ -19,7 +19,7 @@ typedef struct _shell {
     usize args_size;
     usize current_arg_count;
     char bin_dir[PATH_MAX];
-    PJobHandler phnd;
+    PJobHandler* phnd;
 } Shell;
 
 void Shell_Init(Shell* restrict shell, const char* local_dir_path);

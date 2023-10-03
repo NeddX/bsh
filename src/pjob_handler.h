@@ -16,10 +16,11 @@ typedef struct _posix_job_handler {
     struct sigaction sa;
 } PJobHandler;
 
-void PJobHandler_Init(PJobHandler* restrict phnd);
-void PJobHandler_AddJob(PJobHandler* restrict phnd, const pid_t pid, const char* cmd);
-void PJobHandler_RemoveJob(PJobHandler* restrict phnd, const pid_t pid);
-void PJobHandler_SignalHandler(PJobHandler* restrict phnd);
+PJobHandler* PJobHandler_Get();
+void PJobHandler_AddJob(const pid_t pid, const char* cmd);
+void PJobHandler_RemoveJob(const pid_t pid);
+void PJobHandler_SignalHandler();
+void PJobHandler_Destroy();
 
 void signal_handler(const i32 signo);
 

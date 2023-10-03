@@ -1,25 +1,25 @@
 [
 {
   "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
-  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/main.c.o -c /home/nedd/dev/bsh/src/main.c",
+  "command": "/usr/bin/clang   -g -std=gnu99 -o CMakeFiles/bsh.dir/src/main.c.o -c /home/nedd/dev/bsh/src/main.c",
   "file": "/home/nedd/dev/bsh/src/main.c",
   "output": "CMakeFiles/bsh.dir/src/main.c.o"
 },
 {
   "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
-  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/pjob_handler.c.o -c /home/nedd/dev/bsh/src/pjob_handler.c",
+  "command": "/usr/bin/clang   -g -std=gnu99 -o CMakeFiles/bsh.dir/src/pjob_handler.c.o -c /home/nedd/dev/bsh/src/pjob_handler.c",
   "file": "/home/nedd/dev/bsh/src/pjob_handler.c",
   "output": "CMakeFiles/bsh.dir/src/pjob_handler.c.o"
 },
 {
   "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
-  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/shell_interface.c.o -c /home/nedd/dev/bsh/src/shell_interface.c",
+  "command": "/usr/bin/clang   -g -std=gnu99 -o CMakeFiles/bsh.dir/src/shell_interface.c.o -c /home/nedd/dev/bsh/src/shell_interface.c",
   "file": "/home/nedd/dev/bsh/src/shell_interface.c",
   "output": "CMakeFiles/bsh.dir/src/shell_interface.c.o"
 },
 {
   "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
-  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/utils.c.o -c /home/nedd/dev/bsh/src/utils.c",
+  "command": "/usr/bin/clang   -g -std=gnu99 -o CMakeFiles/bsh.dir/src/utils.c.o -c /home/nedd/dev/bsh/src/utils.c",
   "file": "/home/nedd/dev/bsh/src/utils.c",
   "output": "CMakeFiles/bsh.dir/src/utils.c.o"
 }
