@@ -1,11 +1,12 @@
 Basic Shell version 1.0.
 List of internally built commands.
 
-help                    Displays this message.
-cd [ DIR ]              Change current working directory.
-pwd                     Print current working directory.
-exit                    Suspend the shell.
-fg [ ID ]               Bring job to foreground.
-bg [ ID ]               Bring job to background.
-{ exec } &              Start a job in background.  
-joblist                 List currently active jobs.
+help                                        Displays this message.
+cd [ DIR ]                                  Change current working directory.
+pwd                                         Print current working directory.
+exit                                        Suspend the shell.
+fg [ ID ]                                   Bring job to foreground.
+bg [ ID ]                                   Bring job to background.
+{ exec } &                                  Start a job in background.  
+joblist                                     List currently active jobs.
+kill -[ signal ] %[ jod_id ] or [ pid ]     Send a signal to a job or a process.

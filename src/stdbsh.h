@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <ctype.h>
 #include <unistd.h>
 #include <limits.h>
 #include <sys/types.h>

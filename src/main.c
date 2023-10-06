@@ -1,5 +1,3 @@
-#include <string.h>
-
 #include "shell_interface.h"
 
 Shell shell;

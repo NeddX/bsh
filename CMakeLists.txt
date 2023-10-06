@@ -22,7 +22,7 @@ else()
     endif()
 endif()
 
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
 
 # Fetch all the source and header files and the then add them automatically
 file(GLOB_RECURSE BSH_SOURCES "src/*.c")
