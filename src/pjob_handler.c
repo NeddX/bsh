@@ -147,7 +147,9 @@ void signal_handler(i32 signo, siginfo_t* info, void* context) {
                 // Find the job with the given PID and remove it from the jobs list.
                 for (i32 i = 0; i < phnd->active_job_count; i++) {
                     if (phnd->jobs[i].pid == pid) {
-                        printf("\n[-] (%u) %d:\t%s\n", i, phnd->jobs[i].pid, phnd->jobs[i].command);
+						// For OSX.
+						if (phnd->jobs[i].background)	
+							printf("\n[-] (%u) %d:\t%s\n", i, phnd->jobs[i].pid, phnd->jobs[i].command);
                         PJobHandler_RemoveJob(phnd->jobs[i].pid);
                         break;
                     }
@@ -158,7 +160,9 @@ void signal_handler(i32 signo, siginfo_t* info, void* context) {
         case SIGTSTP: {
             kill(phnd->current_fg_job->pid, SIGTSTP);
             phnd->current_fg_job->state = PJOB_STATE_SUSPENDED;
+			phnd->current_fg_job->background = true;
             printf("[suspended] (%zu) %d:\t%s\n", phnd->current_fg_job->id, phnd->current_fg_job->pid, phnd->current_fg_job->command);
+			phnd->current_fg_job = NULL;
             break;
         }
         case SIGCONT: {
