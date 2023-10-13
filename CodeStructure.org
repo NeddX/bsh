@@ -52,11 +52,11 @@ no_ret(arg1: i32, arg2: str)
 The shell itself is a struct called =Shell=.
 It contains the following fields:
     - =status: i32=: Indicates the current shell status, the shell terminates if this value is zero.
-      It is also used to indicate status of program.
+      It is also used to indicate status of a rnning program.
     - =prompt: const str=: Holds the format of the prompt.
     - =cwd: str=: Holds the path of the current working directory.
     - =pwd: str=: Holds the previous working directory.
-    - =buffer: str=: Holds a dynamic block of memory to store the user input.
+    - =buffer: str=: Holds a dynamic string to store the user input.
     - =buffer_size: usize=: Holds the current size of =buffer=.
     - =args: str[..]=: Holds array of strings representing the parsed input arguments.
     - =args_size: usize=: Holds the size of =args= in bytes.
@@ -69,7 +69,7 @@ It contains the following fields:
         It also takes the current binary directory, tries to resolve the absolute path and store it.
         It tries to grab the current working directory as well.
     - =Shell::ParseCommand()=: Tries to parse =Shell::buffer= by spliting it into tokens delimited by space, newline and tab characters and stores them inside =Shell::args=, it also updates =Shell::args_size= and =Shell::current_arg_count= and does the necessary re-allocations if needed.
-    - =Shell::HandleCommand()=: The command handler method. Handles commands by first comparing =args[0]= to any of the possible built-in commands such as =help=, =about=, =cd=, =exit=, =fg=, =bg=, =pwd=, =joblist=, =kill=, if no match was found, then it assumes that =args[0]= is a program so, first it checks if the program is meant to be run in the background by checking for a trailing ampersand symbol (&), if it does find one, then it triggers the =background= flag which will create the job in the background. After which it tries to the program inside =PATH= environment variable, this is accomplished by using =exec= system call with =execvp= variation. The status of the program is later retrieved by =waitpid=.
+    - =Shell::HandleCommand()=: The command handler method. Handles commands by first comparing =args[0]= to any of the possible built-in commands such as =help=, =about=, =cd=, =exit=, =fg=, =bg=, =pwd=, =joblist=, =kill=, if no match was found, then it assumes that =args[0]= is a program so, first it checks if the program is meant to be run in the background by checking for a trailing ampersand symbol (&), if it does find one, then it triggers the =background= flag which will create the job in the background. After which it tries to find the program inside the =PATH= environment variable, this is accomplished by using =exec= system call with =execvp= variation. The status of the program is later retrieved by =waitpid=.
     - =Shell::Run=: Initiates the prompt loop and runs until =Shell::status= is zero.
     - =Shell::Dispose=: Destroys the =Shell= instance and frees up its resources.
 
@@ -97,11 +97,11 @@ The =PJobHandler= struct has the following fields:
 
 =PJobHandler= has the following methods:
     - =PJobHandler::Ctor(&PJobHandler)=: Constructs and initializes the =PJobHandler= singleton and attaches =SIGCHLD= and =SIGTSTP= to be handled by =signal_handler=. This is done so that we can move jobs between foreground and background and have the ability to suspend them.
-    - =PJobHandler::Get()=: Returns a reference to the singleton or creates it and calls the constructor if it doesn't exist.
-    - =PJobHandler::AddJob(const pid_t, const str, bool background)=: Adds a new job with the supplied arguments and appends it to =PJobHandler::jobs= for monitoring. It also does necessary re-allocations if needed. Returns a reference to the newily created job.
+    - =PJobHandler::Get() -> &PJobHandler=: Returns a reference to the singleton or creates it and calls the constructor if it doesn't exist.
+    - =PJobHandler::AddJob(const pid_t, const str, bool background) -> &PJob=: Adds a new job with the supplied arguments and appends it to =PJobHandler::jobs= for monitoring. It also does necessary re-allocations if needed. Returns a reference to the newily created job.
     - =PJobHandler::RemoveJob(const pid_t)=: Removes the job from =PJobHandler::jobs=.
-    - =PJobHandler::GetJobById(const usize)=: Retrieves the job by its ID.
-    - =PJobHandler::GetJobByPid(const pid_t)=: Retrieves the job by its PID.
+    - =PJobHandler::GetJobById(const usize) -> &PJob=: Retrieves the job by its ID.
+    - =PJobHandler::GetJobByPid(const pid_t) -> &PJob=: Retrieves the job by its PID.
     - =PJobHandler::Dispose()=: Destroys the =PJobHandler= instance and frees up its resources.
 
 PJobHandler interface also has a free function =signal_handler(i32, &siginfo_t, &void)= which, as the name suggests handles incoming signals.
