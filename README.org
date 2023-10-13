@@ -50,7 +50,19 @@ BSH has few built-in commands:
 - =joblist=: List currently active jobs.
 
 ** Basic job system
-...
+Create jobs by forwarding them to the background by appending ampersand (&) at the end of the program name.
+List jobs by running built-in =joblist= command.
+Send signals to jobs using built-in =kill= command.
+List of signals that can be sent:
+    1. =SIGQUIT=: Send a termination signal that can be caught by the program and can perform core dump.
+    2. =SIGKILL=: Send a immediate termination signal that cannot be caught by the program.
+    3. =SIGTERM=: Send a termination signal without core dump to the target program.
+    4. =SIGSTOP=: Send a suspension signal.
+    5. =SIGCONT=: Send a continuation signal.
+
+Move jobs between foreground and background with the combination of =fg= and =bg= commands alongside with =CTRL+Z= to temporarily suspend jobs.
+    - =fg { job_id pr pid }=: Moves a job to the foreground.
+    - =bg { job_id or pid }=: Moves a job to the background.
 
 ** License
 BSH is open-source software released under the MIT License. You are free to use, modify, and distribute it as per the terms of the license.
