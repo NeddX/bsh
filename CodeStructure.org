@@ -3,16 +3,16 @@
 * Note
 Please note that the project is =unsafe= hence prone to buffer overflow attacks and such.
 This was done intentionally to reduce complexity.
-CMake was choosen as the build-system instead of Makefiles because it is widely adopted and better than makefiles
+CMake was choosen as the build-system instead of Makefiles because it is widely adopted and better than Makefiles
 in my opinion.
 
 * File structure
 - =src/=: Source files.
-  - =main.c=: Entry point, creates a Shell instances and calls =Shell_Run()= on it.
-  - =stdbsh.h=: Include common header files, macro definitions and type defines.
+  - =main.c=: Entry point, creates a =Shell= instance and calls =Shell_Run()= on it.
+  - =stdbsh.h=: Includes commonly used header files, macro definitions and type definitions.
   - =utils.h=: Handy small utility provider.
   - =shell_interface.h=: Contains the code for the core shell.
-  - =pjob_handler.h=: Contains the code for the job handling subsystem.
+  - =pjob_handler.h=: Contains the code for the job handling sub-system.
 
 
 * Notation used
@@ -27,7 +27,7 @@ Where =identifier= is the name of the variable and =T= is the type of the variab
 - =u16/i16=: Unsigned/Signed 16bit integer.
 - =u32/i32=: Unsigned/Signed 32bit integer.
 - =u64/i64=: Unsigned/Signed 64bit integer.
-- =usize=: Unsgined type that can theoretically hold the size of the possibly largest object on the platform.
+- =usize=: Unsgined type that can theoretically hold the size of the largest object on the platform.
 - =str=: Null-terminated string reference.
 - =T[]=: Array of T(s).
 - =&=: Pointer/Reference indicator.
@@ -36,14 +36,14 @@ Where =identifier= is the name of the variable and =T= is the type of the variab
 ** Operators
 - =[..]=: Array dimension indication by the amount of dots present.
 - =[N]=: Array subscript indicator.
-- =::=: Indicates scope, e.g., =X::Y=: =Y= from =X=.
+- =::=: Scope indicator, e.g., =X::Y=: =Y= from =X=.
 
 ** Functions
 #+begin_src
 fn_identifier(arg_identifier: T, ...) -> U
 #+end_src
 Where =fn_identifier= is the name of the function, =U= is the return type and =arg_identifier= is the name of the argument with =T= being its type.
-Functions that return nothing don't specify a return type.
+Functions that don't return anything do not specify a return type.
 #+begin_src
 no_ret(arg1: i32, arg2: str)
 #+end_src
@@ -52,25 +52,25 @@ no_ret(arg1: i32, arg2: str)
 The shell itself is a struct called =Shell=.
 It contains the following fields:
     - =status: i32=: Indicates the current shell status, the shell terminates if this value is zero.
-      It is also used to indicate status of CLI binaries.
+      It is also used to indicate status of program.
     - =prompt: const str=: Holds the format of the prompt.
-    - =cwd: str=: Holds the path of current working directory.
+    - =cwd: str=: Holds the path of the current working directory.
     - =pwd: str=: Holds the previous working directory.
-    - =buffer: str=: Holds a block of memory to store the user input.
-    - =buffer_size: usize=: Holds the current size of buffer.
-    - =args: str[..]=: Holds array of string representing the parsed input arguments.
+    - =buffer: str=: Holds a dynamic block of memory to store the user input.
+    - =buffer_size: usize=: Holds the current size of =buffer=.
+    - =args: str[..]=: Holds array of strings representing the parsed input arguments.
     - =args_size: usize=: Holds the size of =args= in bytes.
     - =current_arg_count: usize=: Holds the current count of arguments inside =args=.
     - =bin_dir: str=: Holds the current directory of the binary itself.
-    - =phnd: &PJobHandler=: Holds reference to =PJobHandler=, the job handling sub-system.
+    - =phnd: &PJobHandler=: Holds a reference to =PJobHandler=, the job handling sub-system.
 
 =Shell= has the following methods:
     - =Shell::Init(const str)=: Initializes the =Shell= struct alongside with it's fields.
         It also takes the current binary directory, tries to resolve the absolute path and store it.
         It tries to grab the current working directory as well.
     - =Shell::ParseCommand()=: Tries to parse =Shell::buffer= by spliting it into tokens delimited by space, newline and tab characters and stores them inside =Shell::args=, it also updates =Shell::args_size= and =Shell::current_arg_count= and does the necessary re-allocations if needed.
-    - =Shell::HandleCommand()=: The command handler method. Handles commands by first comparing =args[0]= to any of the possible built-in commands such as =help, about, cd, exit, fg, bg, pwd, joblist, kill=, if no match was found then it assumes that =args[0]= is an external CLI binary so, first it checks if the command is meant to be run in the background by checking for a tralining ampersand symbol =&=, if it does find one, then it triggers the =background= flag which will create the job in the background, then it tries to find an executable with the name of =args[0]= inside =PATH= environment variable, this is done by using =exec= system call with =execvp= variation. The status of the command is retrieved by =waitpid=.
-    - =Shell::Run=: Initiates the prompt loop until =Shell::status= is zero.
+    - =Shell::HandleCommand()=: The command handler method. Handles commands by first comparing =args[0]= to any of the possible built-in commands such as =help=, =about=, =cd=, =exit=, =fg=, =bg=, =pwd=, =joblist=, =kill=, if no match was found, then it assumes that =args[0]= is a program so, first it checks if the program is meant to be run in the background by checking for a trailing ampersand symbol (&), if it does find one, then it triggers the =background= flag which will create the job in the background. After which it tries to the program inside =PATH= environment variable, this is accomplished by using =exec= system call with =execvp= variation. The status of the program is later retrieved by =waitpid=.
+    - =Shell::Run=: Initiates the prompt loop and runs until =Shell::status= is zero.
     - =Shell::Dispose=: Destroys the =Shell= instance and frees up its resources.
 
 * PJob
@@ -81,12 +81,12 @@ It has the following fields:
     - =command: str=: Command used to execute the job.
     - =state: PJobState=: Enum representing the current state of the job.
 
-This struct is used conjunction with =PJobHandler= to handle jobs.
+This struct is used in conjunction with =PJobHandler= to handle jobs.
 
 * PJob Handler
 The job handling sub-system that is a singleton struct called =PJobHandler=.
-It handles jobs by storing them in an array and listening for signals and handeling signals these signals.
-It also removes terminated jobs and provides handy methods for adding, retrieving and overall managing jobs.
+It handles jobs by storing them in an array and listening for signals and handeling these signals.
+It also removes terminated jobs and provides handy methods for adding, retrieving and overall job management.
 
 The =PJobHandler= struct has the following fields:
     - =jobs: &PJob[]=: Pre-allocated heap array holding the job objects.
@@ -105,17 +105,17 @@ The =PJobHandler= struct has the following fields:
     - =PJobHandler::Dispose()=: Destroys the =PJobHandler= instance and frees up its resources.
 
 PJobHandler interface also has a free function =signal_handler(i32, &siginfo_t, &void)= which, as the name suggests handles incoming signals.
-This is important because we use signals to organize our job handling system.
+This is important because we use signals to accomplish our job handling system.
 
 The function handles the following signals:
-    - =SIGCHLD=: The child process termination signals. If =PJobHandler= receives this signal, it first retrieves the PID and the status of it using =waitpid= and checks to see if this child process was registered, if it was then it simply removes it from the job list and prints message indicating the termination of the job. This signal gets triggered by child processes that finish their execution.
-    - =SIGTSTP=: The suspension signal. If =PJobHandler= receives this signal, it tries to forward it to the currently active foreground job and sets its state to =PJobState::PJOB_STATE_SUSPENDED=. It also prints a message indicating the suspension of the job.
+    - =SIGCHLD=: The child process termination signal. If =PJobHandler= receives this signal, it means a child process has finished execution so it first retrieves the PID and the status of it using =waitpid= and checks to see if this child process was registered in the job system, if it was, then it simply removes it from the job list and prints a message indicating the termination of the job.
+    - =SIGTSTP=: The suspension signal. If =PJobHandler= receives this signal, it measn the user tried to suspend a running program by pressing =CTRL+Z= so it tries to forward it to the currently active foreground job and sets its state to =PJobState::PJOB_STATE_SUSPENDED=. It also prints a message indicating the suspension of the job.
 
 * Miscellaneous
 ** Utilities
 The utilities module has the following functions:
 - =file_read_all_text(&str) -> &str=: Opens the supplied file, tries to read its contents into a heap allocated buffer and returns it as a null-terminated string, otherwise it returns a =NULL= indicating an error.
-- =str_starts_with(string: &str, pattern: &str) -> bool=: Checks if =string= starts with =pattern=, if yes then returns =true=, =false= otherwise. Is a simple function alias for:
+- =str_starts_with(string: &str, pattern: &str) -> bool=: Checks if =string= starts with =pattern=, if yes then returns =true=, =false= otherwise. This is a simple function alias for:
   #+begin_src c
   !strncmp(str, pattern, strlen(pattern)) == 0
   #+end_src

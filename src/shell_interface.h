@@ -26,6 +26,6 @@ void Shell_Init(Shell* restrict shell, const char* local_dir_path);
 void Shell_ParseCommand(Shell* restrict shell);
 void Shell_HandleCommand(Shell* restrict shell);
 i32 Shell_Run(Shell* restrict shell);
-void Shell_Destroy(Shell* restrict shell);
+void Shell_Dispose(Shell* restrict shell);
 
 #endif // BSH_SHELL_INTERFACE_H
