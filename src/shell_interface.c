@@ -314,7 +314,7 @@ i32 Shell_Run(Shell* restrict shell) {
     return shell->status;
 }
 
-void Shell_Destroy(Shell* restrict shell) {
+void Shell_Dispose(Shell* restrict shell) {
     free(shell->buffer);
     free(shell->args);
 }

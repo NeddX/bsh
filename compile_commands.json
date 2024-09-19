@@ -1,26 +1,26 @@
 [
 {
-  "directory": "/Users/picsartacademy/.nedd/bsh/builds/darwin-x86_64",
-  "command": "/usr/local/opt/llvm/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -o CMakeFiles/bsh.dir/src/main.c.o -c /Users/picsartacademy/.nedd/bsh/src/main.c",
-  "file": "/Users/picsartacademy/.nedd/bsh/src/main.c",
+  "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
+  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/main.c.o -c /home/nedd/dev/bsh/src/main.c",
+  "file": "/home/nedd/dev/bsh/src/main.c",
   "output": "CMakeFiles/bsh.dir/src/main.c.o"
 },
 {
-  "directory": "/Users/picsartacademy/.nedd/bsh/builds/darwin-x86_64",
-  "command": "/usr/local/opt/llvm/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -o CMakeFiles/bsh.dir/src/pjob_handler.c.o -c /Users/picsartacademy/.nedd/bsh/src/pjob_handler.c",
-  "file": "/Users/picsartacademy/.nedd/bsh/src/pjob_handler.c",
+  "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
+  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/pjob_handler.c.o -c /home/nedd/dev/bsh/src/pjob_handler.c",
+  "file": "/home/nedd/dev/bsh/src/pjob_handler.c",
   "output": "CMakeFiles/bsh.dir/src/pjob_handler.c.o"
 },
 {
-  "directory": "/Users/picsartacademy/.nedd/bsh/builds/darwin-x86_64",
-  "command": "/usr/local/opt/llvm/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -o CMakeFiles/bsh.dir/src/shell_interface.c.o -c /Users/picsartacademy/.nedd/bsh/src/shell_interface.c",
-  "file": "/Users/picsartacademy/.nedd/bsh/src/shell_interface.c",
+  "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
+  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/shell_interface.c.o -c /home/nedd/dev/bsh/src/shell_interface.c",
+  "file": "/home/nedd/dev/bsh/src/shell_interface.c",
   "output": "CMakeFiles/bsh.dir/src/shell_interface.c.o"
 },
 {
-  "directory": "/Users/picsartacademy/.nedd/bsh/builds/darwin-x86_64",
-  "command": "/usr/local/opt/llvm/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -o CMakeFiles/bsh.dir/src/utils.c.o -c /Users/picsartacademy/.nedd/bsh/src/utils.c",
-  "file": "/Users/picsartacademy/.nedd/bsh/src/utils.c",
+  "directory": "/home/nedd/dev/bsh/builds/linux-x86_64",
+  "command": "/usr/bin/clang    -fsanitize=address -fno-omit-frame-pointer -g -std=gnu99 -o CMakeFiles/bsh.dir/src/utils.c.o -c /home/nedd/dev/bsh/src/utils.c",
+  "file": "/home/nedd/dev/bsh/src/utils.c",
   "output": "CMakeFiles/bsh.dir/src/utils.c.o"
 }
 ]
